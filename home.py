@@ -60,30 +60,6 @@ if uploaded_file is not None:
 
         if uploaded_file.type == 'application/pdf':
 
-        # # Create a temporary file
-        #     with tempfile.NamedTemporaryFile(delete=False) as temp_file:
-        #         # Write the uploaded file contents to the temporary file
-        #         temp_file.write(uploaded_file.getvalue())
-
-        #         # Get the path of the temporary file
-        #         temp_file_path = temp_file.name
-
-        #     loader = PyPDFLoader(temp_file_path)
-        #     pages = loader.load()
-        #     docs_for_vector_db = split_text_docs_vector(pages)
-
-        #     # Create the LLM model for the question answering
-        #     llm_question_answer = ChatOpenAI(openai_api_key=openai_api_key,temperature=0.4, model="gpt-3.5-turbo-16k")
-
-        #     # Create the vector database and RetrievalQA Chain
-        #     embeddings = OpenAIEmbeddings(openai_api_key=openai_api_key)
-        #     db = FAISS.from_documents(docs_for_vector_db, embeddings)
-        #     qa = RetrievalQAWithSourcesChain.from_chain_type(llm=llm_question_answer, chain_type="stuff", retriever=db.as_retriever(metadatas='page'))
-
-        #     answer = qa({"question": "The type of architectural program that the author has in mind, to whic three things should you pay attention?"})
-
-        #     print(answer)
-
             # Extract and split text from pdf for question generation
             docs_for_q_gen = extract_text_from_pdf_for_q_gen(uploaded_file)
 
@@ -95,7 +71,6 @@ if uploaded_file is not None:
                 with st.spinner("Generating questions..."):
                     st.session_state['questions'] = create_questions(docs_for_q_gen, llm)
 
-
             # Show questions
             st.info(st.session_state['questions'])
 
@@ -104,8 +79,6 @@ if uploaded_file is not None:
 
             # Split the questions into a list
             st.session_state['questions_list'] = questions_var.split('\n')  # Split the string into a list of questions
-
-            # 
 
             # Create vector database
             # Create the LLM model for the question answering
@@ -130,13 +103,6 @@ if uploaded_file is not None:
                     for question in st.session_state['questions_to_answers']:
                         # For each question, generate an answer
                         with st.spinner("Generating answer..."):
-
-                            # # Search for the most similar document
-                            # docs = db.similarity_search(question, k=1)
-                            # # Create inputs for the LLM
-                            # inputs = [{"context": doc.page_content, "topic": question} for doc in docs]
-                            # # Create a chain
-                            # chain = LLMChain(llm=llm, prompt=PROMPT)
 
                             # Run the chain
                             answer = qa.run(question)
