@@ -1,0 +1,15 @@
+streamlit
+pandas
+langchain
+openai
+tabulate
+tiktoken
+openpyxl
+python-dotenv
+streamlit_authenticator
+st-pages
+unstructured
+numpy
+pypdf
+faiss-cpu
+pypdf2
