@@ -14,7 +14,7 @@ from PyPDF2 import PdfReader
 import tempfile
 from llm_helper_function import split_text_q_gen,split_text_q_answer, split_text_docs_vector, extract_text_from_pdf_for_q_gen,extract_text_from_pdf_for_q_answer, create_questions, create_vectordatabase, create_summary
 
-st.title('🦜🔗 Student Preparation App')
+st.title('🦜🔗 Smart Study Hub')
 
 # Load env files
 # load_dotenv()
