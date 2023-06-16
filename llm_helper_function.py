@@ -3,7 +3,7 @@ from langchain.docstore.document import Document
 from langchain.chat_models import ChatOpenAI
 from langchain.chains.summarize import load_summarize_chain
 from langchain.document_loaders import SeleniumURLLoader, PyPDFLoader
-from prompts import PROMPT_QUESTIONS, REFINE_PROMPT_QUESTIONS, PROMPT_SAMENVATTING, REFINE_PROMPT_SAMENVATTING
+from prompts import PROMPT_QUESTIONS, REFINE_PROMPT_QUESTIONS
 from PyPDF2 import PdfReader
 from langchain.vectorstores import FAISS
 from langchain.embeddings.openai import OpenAIEmbeddings
@@ -68,8 +68,3 @@ def create_vectordatabase(docs, openai_api_key):
     embeddings = OpenAIEmbeddings(openai_api_key=openai_api_key)
     db = FAISS.from_documents(docs, embeddings)
     return db
-
-def create_summary(docs, llm):
-    summary_chain = load_summarize_chain(llm, chain_type="refine", verbose=True, question_prompt=PROMPT_SAMENVATTING, refine_prompt=REFINE_PROMPT_SAMENVATTING)
-    summary = summary_chain.run(docs)
-    return summary
