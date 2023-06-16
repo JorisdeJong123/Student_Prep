@@ -16,6 +16,8 @@ from llm_helper_function import split_text_q_gen,split_text_q_answer, split_text
 
 st.title('🦜🔗 Smart Study Hub')
 
+st.markdown("Smart Study Hub is a tool that helps you to study more efficiently. It generates questions from your study material and answers them for you. This way, you can test your knowledge and learn more effectively.")
+
 # Load env files
 # load_dotenv()
 # openai_api_key = os.environ.get('OPENAI_API_KEY')
